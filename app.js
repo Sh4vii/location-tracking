@@ -33,7 +33,7 @@ app.use(passport.session());
 
 //connect to database
 async function connectDatabase(){
-  const url = '';
+  const url = DB_URL;
   
  mongoose.connect(url);
   
