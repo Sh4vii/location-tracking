@@ -1,0 +1,31 @@
+<%- include("partials/header"); -%>
+
+<div id="container">
+  <section id="register">
+        
+        <h1>Welcome,</h1>
+                <p class="muted-paragraph">Please enter your account to login</p>
+                <div class="loader-container">
+                  <div class="loader"></div>
+                </div>
+                
+          <div class="register-container">
+                  <form action="/login" method="POST" accept-charset="utf-8">
+                      <input placeholder="email" type="text" name="username" id="" value="" />
+                      <input placeholder="password" type="password" name="password" id="" value="" />
+                      <button class="btn btn-filled" type="submit">Login</button>
+                  </form>
+                  <p class="sign-up">Don't have an account? <a href="/signup" class="colored">Sign Up</a></p>
+            </div>
+            
+           <!-- <div class="footer">
+              <p>Copyright @zidio.com. All rights reserved.</p>
+            </div> -->
+              
+        
+      </section>
+</div>
+
+
+      
+<%- include("partials/footer"); -%>

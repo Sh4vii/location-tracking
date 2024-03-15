@@ -1,0 +1,51 @@
+<%- include("partials/historyHeader"); -%>
+
+<section id="container">
+  <section class="historys">
+          <%  console.log(locationHistory) %>
+          <% locationHistory.forEach((history)=>{    %>
+ <% const timestamp = parseInt(history.date) %>
+ 
+ <% const date = new Date(timestamp)%>
+
+    <% const formattedDate = date.toLocaleDateString(); %>
+    
+  <% const minute = date.getMinutes() %>
+  <% let hour = date.getHours() %>
+ <% let ampm = hour >= 12 ? 'PM' : 'AM'; %>
+
+<% hour = hour % 12; %>
+<% hour = hour ? hour : 12; %>
+
+    <% const formattedTime = `${hour}:${minute}${ampm}`; %>
+
+   
+        <div class="history">
+      <div class="timeStamp">
+        <h4><%= formattedDate %></h4>
+        <p class="small"><%= formattedTime %></p>
+      </div>
+      
+      <!-- <h4>Address: Shinge road lafia, Nasarawa State</h4> -->
+      
+      <div>
+        <p class="small">Latitude: <%=history.latitude%></p>
+        <p class="small">Longitude: <%=history.longitude%></p>
+      </div> 
+      
+      <p class="colored small">View on map</p>
+    </div>
+      <%   }) %>
+    
+          </section>
+</section>
+
+<section class="controls">
+  <a href="/dashboard" class="control"><i class="fa-solid fa-location-crosshairs"></i></a>
+  <a href="/history" class="control"><i class="fa-solid fa-map-location-dot colored"></i></a>
+  <a href="/notification" class="control"><i class="fa-solid fa-bell"></i></a>
+</section>
+      
+	<script src="js/history.js"></script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<%- include("partials/header"); -%>
+
+<section id="dashboard">
+        <div class="loader-container">
+                  <div class="loader"></div>
+                </div>
+        <h1>Welcome to your dashboard.</h1>
+                <p class="muted-paragraph"></p>
+                
+         <!-- <div class="dashboard-container">
+              <div class="meter">
+                <p class="small">Distance Covered</p>
+                <h2 class="value medium">3500Km</h2>
+              </div>
+              <div class="vr"></div>
+              <div class="meter">
+                <p class="small">Tokens earned</p>
+                <h2 class="value medium">14,962 ADT</h2>
+              </div>
+          </div> 
+          <div class="earn">
+            <button class="btn btn-filled earn-btn">Hit The Road<span class="red-dot"><i class="fa-solid fa-traffic-light"></i></span></button>
+          </div>  -->
+          <section class="current-location">
+            <p class="small">
+              Current location
+            </p>
+            <h2 id="current-position" class="medium">--- ---- -----</h2>
+            <div>
+              <p id="lat" class="small">Latitude: --.--</p>
+              <p id="lon" class="small">Longitude: --.--</p>
+            </div>
+          </section>
+          <section class="map-container" id="map">
+
+          </section>
+        
+      </section>
+      
+<section class="controls">
+  <a href="/dashboard" class="control"><i class="fa-solid fa-earth-africa colored"></i></a>
+  <a href="/history" class="control"><i class="fa-solid fa-map-location-dot"></i></a>
+  <a href="/notification" class="control"><i class="fa-solid fa-bell"></i></a>
+</section>
+      
+	<script src="js/map.js"></script>
+  </body>
+</html>
