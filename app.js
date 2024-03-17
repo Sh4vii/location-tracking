@@ -5,9 +5,11 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("./models/passport-config");
+const upload = require('./middleware/Multer-config');
 
 const dashboardRoute = require('./routes/Dashboard');
 const profileRoute = require('./routes/Profile');
+const profilePictureRoute = require('./routes/ProfilePicture');
 const historyRoute = require('./routes/History');
 const notificationRoute = require('./routes/Notification');
 
@@ -18,6 +20,7 @@ const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -80,6 +83,7 @@ app.use('/dashboard', isLoggedIn, dashboardRoute)
 app.use('/history', isLoggedIn, historyRoute);
 app.use('/notification', isLoggedIn, notificationRoute);
 app.use('/profile', isLoggedIn, profileRoute);
+app.use('/profilepicture', isLoggedIn, profilePictureRoute);
 
 // check isLoggedIn middleware
 function isLoggedIn(req, res, next){
@@ -88,6 +92,21 @@ function isLoggedIn(req, res, next){
     }
     res.redirect("/");
 }
+
+//Clear history route
+app.get("/clearhistory", isLoggedIn, async(req, res)=>{
+  const userId = req.user.id;
+  
+  const user = await User.findOne({_id: userId});
+  user.history = [];
+  
+  try{
+    user.save();
+    res.redirect("/history");
+  }catch(err){
+    console.log(err);
+  }
+})
 
 // Logout route
 app.get('/logout', function(req, res, next){

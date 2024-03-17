@@ -1,14 +1,93 @@
-<%- include("partials/header"); -%>
+<%- include("partials/profile-header"); -%>
 <div id="container">
+  <div class="center"> 
+  <div class="outpour"> 
+    <div class="mag"> 
+      <span class="up"> 
+        <i class="fa-solid fa-arrow-up-from-bracket"></i> 
+     </span> 
+<form class="dp-form" action="/dp" method="POST">
+  <input type="file" id="image" class="upload" onchange="upload()" accept="image/*"> 
+</form>
+      
+    </div> 
+    <div class="profile-info">
+      <% const fullName = `${userProfile.firstName} ${userProfile.lastName}`; %>
+     <h2><%= fullName %></h2>
+     <p class="small"><%= userProfile.email %></p>
+    </div>
+  </div>       
+  </div> 
+ 
+  <section class="user-profile">
+   <form action="/profile" method="POST" accept-charset="utf-8">
+     <label for="">First Name</label>
+     <input placeholder="First name" type="text" name="firstname" id="" value="<%= userProfile.firstName %>" required/>
+     <label for="">Last Name</label>
+     <input placeholder="Last name" type="text" name="lastname" id="" value="<%= userProfile.lastName %>" />
+     <label for="">Email</label>
+     <input placeholder="Email" type="email" name="email" id="" value="<%= userProfile.email %>" readonly/>
+     <label for="">Home Address</label>
+     <input placeholder="Home Address" type="text" name="homeaddress" id="" value="<%= userProfile.address%>" />
+     <button class="btn btn-filled" type="submit">Update</button>
+ </form>
+  </section>
+   
+  <section class="account-container" id="net"> 
   
-<form action="/logout" method="GET" accept-charset="utf-8">
-                      <button class="btn btn-filled" type="submit">Logout</button>
-            </form>
-            
-            <div class="footer">
-              <p>Copyright @zidio.com. All rights reserved.</p>
-            </div>
-</div>
-
-            
-<%- include("partials/footer"); -%>
+  <span class="hover" onclick="document.location='/dashboard'"> 
+  <p class="pr">Current-location</p> 
+  <div class="p"><small>Go to dashboard</small></div> 
+  </span> 
+   
+  <span class="hover" onclick="document.location='/history'"> 
+  <p class="pr">History</p> 
+  <div class="p"><small>View your past locations</small></div> 
+  </span> 
+   
+  <span class="hover" onclick="document.location='/notification'"> 
+  <p class="pr">Notifications</p> 
+  <div class="p"><small>Your notifications</small></div> 
+  </span> 
+   
+  <span class="hover" style="padding-top: 0px; padding-bottom: 8px;"> 
+  <details> 
+     <summary> 
+       <p style="color: #1b1b1b;" class="pr">Settings&blacktriangledown;</p> 
+       <div class="p"><small>Change settings</small></div> 
+     </summary> 
+         <p class="tog" onclick="dark()">Dark Mode</p> 
+         <p class="tog" onclick="light()">Light Mode</p> 
+         <form class="form-btn" action="/clearhistory" method="GET" accept-charset="utf-8">
+           <button class="clear-btn" type="submit">Clear location history</button>
+         </form>
+         <form class="form-btn" action="/logout" method="GET" accept-charset="utf-8">
+           <button class="clear-btn" type="submit">Logout</button>
+         </form>
+       
+   </details> 
+  </span> 
+   
+  <span class="hover"> 
+  <p class="pr">Referals</p> 
+  <div class="p"><small>Refer a friend (coming soon)</small></div> 
+  </span> 
+   
+  </section> 
+             
+ <section class="controls"> 
+    <a href="/dashboard" class="control" ><i class="fa-solid fa-earth-africa colored" style="color: #1b1b1b;"></i></a> 
+    <a href="/history" class="control"><i class="fa-solid fa-map-location-dot"></i></a> 
+    <a href="/notification" class="control"><i class="fa-solid fa-bell"></i></a> 
+ </section> 
+             
+ <div class="footer">
+               <p>
+                 Copyright @zidio.com. All rights reserved.
+               </p>
+ </div>
+ 
+ </div>            
+   <script src="js/profile.js"></script>
+   </body>
+ </html>
