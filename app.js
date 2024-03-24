@@ -82,7 +82,7 @@ app.use('/dashboard', isLoggedIn, dashboardRoute)
 app.use('/history', isLoggedIn, historyRoute);
 app.use('/notification', isLoggedIn, notificationRoute);
 app.use('/profile', isLoggedIn, profileRoute);
-app.use('/profilepicture', isLoggedIn, profilePictureRoute);
+
 
 // check isLoggedIn middleware
 function isLoggedIn(req, res, next){
