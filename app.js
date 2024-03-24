@@ -9,7 +9,6 @@ const upload = require('./middleware/Multer-config');
 
 const dashboardRoute = require('./routes/Dashboard');
 const profileRoute = require('./routes/Profile');
-const profilePictureRoute = require('./routes/ProfilePicture');
 const historyRoute = require('./routes/History');
 const notificationRoute = require('./routes/Notification');
 
