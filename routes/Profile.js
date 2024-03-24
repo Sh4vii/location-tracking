@@ -10,7 +10,7 @@ router.get("/", async(req, res)=>{
   const user = await User.findOne({_id: userId});
   
   const userProfile = {...user.profile, email: user.username}
-  console.log(userProfile);
+  
   
   try{
         res.render("profile", {userProfile: userProfile});
@@ -22,7 +22,6 @@ router.get("/", async(req, res)=>{
 router.post("/", async(req, res)=>{
   const userId = req.user.id;
   const profileData = req.body;
-  console.log(profileData);
   
   const user = await User.findOne({_id: userId});
   
@@ -63,7 +62,6 @@ router.post('/dp', upload.single('image'), async(req, res) => {
 );
 router.get('/dp', async(req, res)=>{
   const userId = req.user.id;
-  console.log(req.body);
   
   const user = await User.findOne({_id: userId});
   const profilePicture = {profilePicture: user.profilePicture};
