@@ -10,6 +10,7 @@ const upload = require('./middleware/Multer-config');
 const dashboardRoute = require('./routes/Dashboard');
 const profileRoute = require('./routes/Profile');
 const historyRoute = require('./routes/History');
+const locationsRoute = require('./routes/Locations');
 const notificationRoute = require('./routes/Notification');
 
 //Import user model
@@ -80,9 +81,9 @@ app.post("/login", passport.authenticate("local",{
 
 app.use('/dashboard', isLoggedIn, dashboardRoute)
 app.use('/history', isLoggedIn, historyRoute);
+app.use('/locations', isLoggedIn, locationsRoute);
 app.use('/notification', isLoggedIn, notificationRoute);
 app.use('/profile', isLoggedIn, profileRoute);
-
 
 // check isLoggedIn middleware
 function isLoggedIn(req, res, next){
