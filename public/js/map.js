@@ -1,13 +1,4 @@
-/**const menu = document.querySelector("#menu");
-const close = document.querySelector("#close");
-const nav =  document.querySelector(".nav");
 
-menu.addEventListener("click", ()=>{
-    nav.classList.toggle("reveal");
-})
-close.addEventListener("click",()=>{
-  nav.classList.toggle("reveal");
-}) **/
 
 // Loader
 const loaderBtn = document.querySelectorAll(".btn");
@@ -27,10 +18,12 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+
+// Retrieve data from local storage
+let storedData = JSON.parse(localStorage.getItem('data'));
+
 //Native js geolocation api
 let latitude, longitude;
-let setLatitude = 0; 
-let setLongitude = 0;
 
 navigator.geolocation.watchPosition(successful, error);
 let marker, circle, zoomed;
@@ -69,6 +62,19 @@ function error(){
   }
 }
 
+if(!storedData){
+  let data = {
+    latitude: latitude,
+    longitude: longitude
+    }
+    localStorage.setItem('data', JSON.stringify(data));
+}
+
+storedData = JSON.parse(localStorage.getItem('data'));
+
+let setLatitude = storedData.latitude || 0; 
+let setLongitude = storedData.longitude || 0;
+
 function getCurrentAddress(latitude, longitude){
   
   const myLocation = document.querySelector("#current-position");
@@ -98,10 +104,10 @@ fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitu
 function sendLocationToServer(latitude, longitude){
   
   console.log({setLatitude, setLongitude, latitude, longitude});
-  const roundedLatitude = Math.round(latitude, 3);
-  const roundedLongitude = Math.round(longitude, 3);
+  const roundedLatitude = latitude.toFixed(3);
+  const roundedLongitude = longitude.toFixed(3);
   
-  console.log(roundedLatitude, roundedLongitude)
+  console.log({roundedLatitude, roundedLongitude})
   
   if(setLatitude != roundedLatitude || setLongitude != roundedLongitude){
     
@@ -111,10 +117,7 @@ function sendLocationToServer(latitude, longitude){
       date:  Date.now()
     }
     
-    setLatitude = roundedLatitude;
-    setLongitude = roundedLongitude;
-    
-fetch('/dashboard', {
+  fetch('/dashboard', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -134,9 +137,22 @@ fetch('/dashboard', {
   console.error('There was a problem with the POST request:', error);
 });
 
-  }else{
-    return
-  }
+    setLatitude = roundedLatitude;
+    setLongitude = roundedLongitude;
+    
+    // Store two values in local storage
+let data = {
+    latitude: setLatitude,
+    longitude: setLongitude
+    }
+    localStorage.setItem('data', JSON.stringify(data));
+   } else{
+    let data = {
+    latitude: setLatitude,
+    longitude: setLongitude
+    }
+    localStorage.setItem('data', JSON.stringify(data));
+    }
 }
 
 
