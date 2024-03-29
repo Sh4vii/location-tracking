@@ -2,7 +2,7 @@
 
 <section id="container">
   <section class="historys">
-          <%  console.log(locationHistory) %>
+          
           <% locationHistory.forEach((history)=>{    %>
  <% const timestamp = parseInt(history.date) %>
  
@@ -19,29 +19,29 @@
 
     <% const formattedTime = `${hour}:${minute}${ampm}`; %>
 
-   
-        <div class="history">
+   <form class="history-form" action="/locations" method="POST">
+     <div class="history">
       <div class="timeStamp">
-        <h4><%= formattedDate %></h4>
-        <p class="small"><%= formattedTime %></p>
+        <h4><input class="short" name="date" value="<%= formattedDate %>" readonly/></h4>
+        <p class="small"><input class="short" name="time" value="<%= formattedTime %>" readonly/></p>
       </div>
       
-      <!-- <h4>Address: Shinge road lafia, Nasarawa State</h4> -->
       
       <div>
-        <p class="small">Latitude: <%=history.latitude%></p>
-        <p class="small">Longitude: <%=history.longitude%></p>
+        <p class="small">Latitude: <input class="long" name="latitude" value="<%=history.latitude%>" readonly/></p>
+        <p class="small">Longitude: <input class="long" name="longitude" value="<%=history.longitude%>"  readonly/></p>
       </div> 
       
-      <p class="colored small">View on map</p>
+      <button type="submit" onclick="viewLocation" class="colored small">View on map</button>
     </div>
+   </form>
       <%   }) %>
     
-          </section>
+   </section>
 </section>
 
 <section class="controls">
-  <a href="/dashboard" class="control"><i class="fa-solid fa-location-crosshairs"></i></a>
+  <a href="/dashboard" class="control"><i class="fa-solid fa-earth-africa"></i></a>
   <a href="/history" class="control"><i class="fa-solid fa-map-location-dot colored"></i></a>
   <a href="/notification" class="control"><i class="fa-solid fa-bell"></i></a>
 </section>

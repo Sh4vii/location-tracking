@@ -49,7 +49,7 @@ body{
   margin: 58px 0 0; 
 } 
 #container{ 
-  padding:  20px 16% 20px; 
+  padding:  20px 30% 20px; 
 } 
 #container-signup{ 
   padding: 40px 6%; 
@@ -75,6 +75,7 @@ body{
   padding: 10px; 
 } 
 .controls .control i{ 
+  color: var(--muted-text-color);
   font-size: 18px; 
 } 
 i{ 
